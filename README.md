@@ -1,5 +1,3 @@
-Plus plugins
-
 This set of plugins provides a framework for extensible HTML-based
 transformations.  The transformation types "html+", "xhtml+",
 "eclipsehelp+" and "htmlhelp+" produce the same output as the basic
@@ -7,6 +5,7 @@ DITA-OT ones, but there are a number of extension points which enable
 you to add additional functionality to the transforms.
 
 Extra functionality out of the box includes:
+
 * Rasterization of SVG images referenced in <image> elements.
 * Presentation MathML in topics can be rendered to SVG (and then
   optionally rasterized).
@@ -26,6 +25,7 @@ Extra functionality out of the box includes:
 
 Many of these additions require additional free software.  Requirements
 may include:
+
 * Apache Ant 1.7 [ant.jar]
 * Apache Batik 1.7, an SVG processor [batik-all.jar]
 * Batik Rasterizer Ant task (contributed code to Batik) [rasterizertask.jar]
@@ -35,6 +35,7 @@ may include:
 * Mozilla Rhino, a JavaScript interpreter [js.jar]
 * Apache Commons External APIs [xml-apis-ext.jar]
 * Apache Commons Logging APIs [commons-logging-api-1.1.jar]
+
 Ensure that these are available in the classpath before invoking the
 transform.  Each plugin contains a document doc/reference.xml which
 describes its prerequisites.
@@ -42,9 +43,8 @@ describes its prerequisites.
 Support for these plugins is available by posting to the dita-users
 Yahoo group.
 
-These plugins are distributed under the same terms as DITA Open Toolkit.
+License
+-------
 
-Deborah Pickett
-Moldflow Pty Ltd
-January 2009
+The plug-ins are distributed under the same terms as DITA Open Toolkit, at the user's election, under the [Common Public License](http://www.opensource.org/licenses/cpl1.0.php) 1.0 (CPL) or [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0).
 
