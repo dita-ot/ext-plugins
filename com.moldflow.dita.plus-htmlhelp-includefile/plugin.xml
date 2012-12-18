@@ -1,6 +1,9 @@
 <plugin id="com.moldflow.dita.plus-htmlhelp-includefile">
   <require plugin="com.moldflow.dita.plus-transtype-htmlhelp"/>
   
+  <extension-point id="depend.plus-transtype-htmlhelp.compile.pre" name="Compile pre-processing"/>
+  <extension-point id="depend.plus-transtype-htmlhelp.map.basic.hhp.pre" value="Basic map HHP pre-processing"/>
+  
   <template file="build_plus-htmlhelp-includefile_template.xml"/>
 
   <feature extension="dita.conductor.target.relative" value="build.xml" type="file"/>

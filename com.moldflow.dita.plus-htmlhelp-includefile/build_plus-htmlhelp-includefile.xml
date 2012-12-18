@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?><project name="plus-htmlhelp-includefile">
+
+  <target name="plus-htmlhelp-includefile.set-includefile">
+    <property name="args.htmlhelp.includefile" location="${output.dir}${file.separator}includefilelist"></property>
+    <echo file="${args.htmlhelp.includefile}"></echo>
+ </target>
+  
+
+</project>

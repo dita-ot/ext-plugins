@@ -2,6 +2,17 @@
   <require plugin="com.moldflow.dita.plus-allhtml-syntaxdiagram"/>
   <require plugin="com.moldflow.dita.plus-allhtml-svgobject"/>
   <require plugin="com.moldflow.dita.syntaxdiagram2svg"/>
+  
+  <extension-point id="xsl.plus-eclipsehelp-topics-twopass.stage1" name="Eclipsehelp topics twopass stage1"/>
+  <extension-point id="xsl.plus-htmlhelp-topics-twopass.stage1" name="HTMLhelp topics twopass stage1"/>
+  <extension-point id="xsl.plus-html-topics-twopass.stage1" name="HTML topics twopass stage1"/>
+  <extension-point id="xsl.plus-xhtml-topics-twopass.stage1" name="XHTML topics twopass stage1"/>
+  <extension-point id="depend.plus-eclipsehelp-topics-twopass.stage1.pre" name="Eclipsehelp topics twopass stage1 pre-processing"/>
+  <extension-point id="depend.plus-htmlhelp-topics-twopass.stage1.pre" name="HTMLhelp topics twopass stage1 pre-processing"/>
+  <extension-point id="depend.plus-html-topics-twopass.stage1.pre" name="HTML topics twopass stage1 pre-processing"/>
+  <extension-point id="depend.plus-xhtml-topics-twopass.stage1.pre" name="XHTML topics twopass stage1 pre-processing"/>
+  <extension-point id="xsl.plus-allhtml-svgobject.svg2imagemap" name="SVG2Imagemap processing"/>
+  <extension-point id="depend.plus-allhtml-svgobject.make-static.pre" name="Make static pre-processing" type="text"/>
 
   <template file="build_plus-allhtml-syntaxdiagram-svgobject_template.xml"/>
   <template file="xsl/xhtml_template.xsl"/>

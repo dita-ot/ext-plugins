@@ -13,6 +13,8 @@
 
   <feature extension="xsl.plus-eclipsehelp-topics-twopass.stage2" value="xsl/xhtml-stage2.xsl" type="file"/>
   <feature extension="xsl.plus-xhtml-topics-twopass.stage2" value="xsl/xhtml-stage2.xsl" type="file"/>
+  
+  <!-- Not sure these will break. -->
 
   <feature extension="depend.plus-eclipsehelp-topics-twopass.stage1.pre" value="plus-allhtml-mathml-svginline.init" type="text"/>
   <feature extension="depend.plus-eclipsehelp-topics-twopass.stage1.post" value="plus-allhtml-mathml-svginline.call" type="text"/>

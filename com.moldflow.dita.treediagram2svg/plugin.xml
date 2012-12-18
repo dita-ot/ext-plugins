@@ -2,6 +2,8 @@
 <plugin id="com.moldflow.dita.treediagram2svg">
 
   <feature extension="dita.conductor.target.relative" value="build.xml" type="file"/>
+  
+  <extension-point id="treediagram2svg.pull.xsl" name="Treediagram2SVG pull process"/>
 
   <feature extension="treediagram2svg.pull.xsl" value="xsl/treediagram2svg.xsl" type="file"/>
 

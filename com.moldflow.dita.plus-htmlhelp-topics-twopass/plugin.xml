@@ -2,6 +2,8 @@
 
   <require plugin="com.moldflow.dita.doctype.xhtml"/>
   <require plugin="com.moldflow.dita.plus-transtype-htmlhelp"/>
+  
+  <extension-point id="depend.plus-transtype-htmlhelp.topics.dispatch" name="HTML twopass topic dispatch"/>
 
   <template file="build_plus-htmlhelp-topics-twopass_template.xml"/>
   <template file="xsl/stage1-html-shell_template.xsl"/>

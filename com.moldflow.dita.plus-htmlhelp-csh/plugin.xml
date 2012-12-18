@@ -7,6 +7,9 @@
   <template file="xsl/topic2alias-shell_template.xsl"/>
 
   <feature extension="dita.conductor.target.relative" value="build.xml" type="file"/>
+  
+  <!-- Don't think these will break. -->
+  
   <feature extension="depend.plus-transtype-htmlhelp.map.basic.hhp.pre" value="plus-htmlhelp-csh.alias" type="text" />
   <feature extension="xsl.plus-transtype-htmlhelp.map2hhp" value="xsl/map2hhp.xsl" type="file"/>
 

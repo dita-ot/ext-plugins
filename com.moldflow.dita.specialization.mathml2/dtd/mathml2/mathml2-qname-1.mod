@@ -7,7 +7,7 @@
      both its structure and content.
 
      Copyright 1998-2000 W3C (MIT, INRIA, Keio), All Rights Reserved.
-     Revision: $Id: mathml2-qname-1.mod,v 1.2 2010/01/16 04:28:17 imagiczhang Exp $ 
+     Revision: $Id: mathml2-qname-1.mod,v 1.1.2.1 2009/01/28 05:49:30 debbiep-sf Exp $ 
 
      This DTD module is identified by the PUBLIC and SYSTEM identifiers:
 

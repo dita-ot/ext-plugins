@@ -1,6 +1,8 @@
 <plugin id="com.moldflow.dita.plus-htmlhelp-hhp-modular">
 
   <require plugin="com.moldflow.dita.plus-transtype-htmlhelp"/>
+  
+  <extension-point id="xsl.plus-transtype-htmlhelp.map2hhp" name="Map2HHP processing"/>
 
   <feature extension="xsl.plus-transtype-htmlhelp.map2hhp" value="xsl/map2hhp.xsl" type="file"/>
 

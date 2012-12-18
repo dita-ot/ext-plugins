@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="utf-8"?><!-- This file is part of the DITA Open Toolkit project hosted on 
+     Sourceforge.net. See the accompanying license.txt file for 
+     applicable licenses.--><!-- (c) Copyright IBM Corp. 2006 All Rights Reserved. --><project name="general+">
+    
+  <!-- Need checkouterTransform? -->
+
+  <target name="plus-allhtml-topic2html.html.nomapper" unless="noTopic">
+    <condition property="out.ext" value=".html">
+      <not>
+        <isset property="out.ext"></isset>
+      </not>
+    </condition>
+    <condition property="args.xsl" value="${dita.script.dir}${file.separator}dita2html.xsl">
+      <not>
+        <isset property="args.xsl"></isset>
+      </not>
+    </condition>
+    <makeurl validate="no" file="${dita.input.valfile}" property="dita.input.valfile.url"></makeurl>
+    <xslt processor="trax" basedir="${dita.temp.dir}" destdir="${destdir}" includes="${includes}" extension="${out.ext}" style="${args.xsl}" classpathref="dost.class.path" filenameparameter="CURRENTFILE" filedirparameter="CURRENTDIR">
+      <param name="DITAEXT" expression="${dita.ext}" if="dita.ext"></param>
+      <param name="FILTERFILE" expression="${dita.input.valfile.url}" if="dita.input.valfile"></param>
+      <param name="CSS" expression="${args.css.file}" if="args.css.file"></param>
+      <param name="CSSPATH" expression="${user.csspath}" if="user.csspath"></param>
+      <param name="HDF" expression="${args.hdf}" if="args.hdf"></param>
+      <param name="HDR" expression="${args.hdr}" if="args.hdr"></param>
+      <param name="FTR" expression="${args.ftr}" if="args.ftr"></param>
+      <param name="DRAFT" expression="${args.draft}" if="args.draft"></param>
+      <param name="ARTLBL" expression="${args.artlbl}" if="args.artlbl"></param>
+      <param name="INDEXSHOW" expression="${args.indexshow}" if="args.indexshow"></param>
+      <param name="OUTEXT" expression="${out.ext}" if="out.ext"></param>
+      
+  
+<param name="ENCODING" expression="${plus.topics.encoding}" if="plus.topics.encoding"></param>
+
+      
+    </xslt>
+  </target>
+
+  <target name="plus-allhtml-topic2html.html.regexpmapper" unless="noTopic">
+    <condition property="out.ext" value=".html">
+      <not>
+        <isset property="out.ext"></isset>
+      </not>
+    </condition>
+    <condition property="args.xsl" value="${dita.script.dir}${file.separator}dita2html.xsl">
+      <not>
+        <isset property="args.xsl"></isset>
+      </not>
+    </condition>
+    <makeurl validate="no" file="${dita.input.valfile}" property="dita.input.valfile.url"></makeurl>
+    <xslt processor="trax" basedir="${dita.temp.dir}" destdir="${destdir}" includes="${includes}" style="${args.xsl}" classpathref="dost.class.path" filenameparameter="CURRENTFILE" filedirparameter="CURRENTDIR">
+      <mapper type="regexp" from="${mapperfrom}" to="${mapperto}"></mapper>
+      <param name="DITAEXT" expression="${dita.ext}" if="dita.ext"></param>
+      <param name="FILTERFILE" expression="${dita.input.valfile.url}" if="dita.input.valfile"></param>
+      <param name="CSS" expression="${args.css.file}" if="args.css.file"></param>
+      <param name="CSSPATH" expression="${user.csspath}" if="user.csspath"></param>
+      <param name="HDF" expression="${args.hdf}" if="args.hdf"></param>
+      <param name="HDR" expression="${args.hdr}" if="args.hdr"></param>
+      <param name="FTR" expression="${args.ftr}" if="args.ftr"></param>
+      <param name="DRAFT" expression="${args.draft}" if="args.draft"></param>
+      <param name="ARTLBL" expression="${args.artlbl}" if="args.artlbl"></param>
+      <param name="INDEXSHOW" expression="${args.indexshow}" if="args.indexshow"></param>
+      <param name="OUTEXT" expression="${out.ext}" if="out.ext"></param>
+      
+  
+<param name="ENCODING" expression="${plus.topics.encoding}" if="plus.topics.encoding"></param>
+
+      
+    </xslt>
+  </target>
+
+  <target name="plus-allhtml-topic2html.html.globmapper" unless="noTopic">
+    <condition property="out.ext" value=".html">
+      <not>
+        <isset property="out.ext"></isset>
+      </not>
+    </condition>
+    <condition property="args.xsl" value="${dita.script.dir}${file.separator}dita2html.xsl">
+      <not>
+        <isset property="args.xsl"></isset>
+      </not>
+    </condition>
+    <makeurl validate="no" file="${dita.input.valfile}" property="dita.input.valfile.url"></makeurl>
+    <xslt processor="trax" basedir="${dita.temp.dir}" destdir="${destdir}" includes="${includes}" style="${args.xsl}" classpathref="dost.class.path" filenameparameter="CURRENTFILE" filedirparameter="CURRENTDIR">
+      <mapper type="glob" from="${mapperfrom}" to="${mapperto}"></mapper>
+      <param name="DITAEXT" expression="${dita.ext}" if="dita.ext"></param>
+      <param name="FILTERFILE" expression="${dita.input.valfile.url}" if="dita.input.valfile"></param>
+      <param name="CSS" expression="${args.css.file}" if="args.css.file"></param>
+      <param name="CSSPATH" expression="${user.csspath}" if="user.csspath"></param>
+      <param name="HDF" expression="${args.hdf}" if="args.hdf"></param>
+      <param name="HDR" expression="${args.hdr}" if="args.hdr"></param>
+      <param name="FTR" expression="${args.ftr}" if="args.ftr"></param>
+      <param name="DRAFT" expression="${args.draft}" if="args.draft"></param>
+      <param name="ARTLBL" expression="${args.artlbl}" if="args.artlbl"></param>
+      <param name="INDEXSHOW" expression="${args.indexshow}" if="args.indexshow"></param>
+      <param name="OUTEXT" expression="${out.ext}" if="out.ext"></param>
+      
+  
+<param name="ENCODING" expression="${plus.topics.encoding}" if="plus.topics.encoding"></param>
+
+      
+    </xslt>
+  </target>
+
+  <target name="plus-allhtml-topic2html.xhtml.nomapper" unless="noTopic">
+    <condition property="out.ext" value=".html">
+      <not>
+        <isset property="out.ext"></isset>
+      </not>
+    </condition>
+    <condition property="args.xsl" value="${dita.script.dir}${file.separator}dita2xhtml.xsl">
+      <not>
+        <isset property="args.xsl"></isset>
+      </not>
+    </condition>
+    <makeurl validate="no" file="${dita.input.valfile}" property="dita.input.valfile.url"></makeurl>
+    <xslt processor="trax" basedir="${dita.temp.dir}" destdir="${destdir}" includes="${includes}" extension="${out.ext}" style="${args.xsl}" classpathref="dost.class.path" filenameparameter="CURRENTFILE" filedirparameter="CURRENTDIR">
+      <param name="DITAEXT" expression="${dita.ext}" if="dita.ext"></param>
+      <param name="FILTERFILE" expression="${dita.input.valfile.url}" if="dita.input.valfile"></param>
+      <param name="CSS" expression="${args.css.file}" if="args.css.file"></param>
+      <param name="CSSPATH" expression="${user.csspath}" if="user.csspath"></param>
+      <param name="HDF" expression="${args.hdf}" if="args.hdf"></param>
+      <param name="HDR" expression="${args.hdr}" if="args.hdr"></param>
+      <param name="FTR" expression="${args.ftr}" if="args.ftr"></param>
+      <param name="DRAFT" expression="${args.draft}" if="args.draft"></param>
+      <param name="ARTLBL" expression="${args.artlbl}" if="args.artlbl"></param>
+      <param name="INDEXSHOW" expression="${args.indexshow}" if="args.indexshow"></param>
+      <param name="OUTEXT" expression="${out.ext}" if="out.ext"></param>
+      
+  
+<param name="ENCODING" expression="${plus.topics.encoding}" if="plus.topics.encoding"></param>
+
+      
+
+      <!-- SVG image parameters. -->
+      
+<param name="plus-svgimage-format" expression="${plus.svgimage.format}" if="plus.svgimage.format"></param>
+
+
+
+      <!-- MathML parameters. -->
+      
+<param name="plus-mathml-format" expression="${plus.mathml.format}" if="plus.mathml.format"></param>
+
+
+
+
+      <!-- SVG-object parameters. -->
+      
+<param name="plus-svgobject-format" expression="${plus.svgobject.format}" if="plus.svgobject.format"></param>
+      
+<param name="plus-svgobject-raster-mimetype" expression="${plus.svgobject.raster.mimetype}" if="plus.svgobject.raster.mimetype"></param>
+      
+<param name="plus-svgobject-object-convert-to-path" expression="${plus.svgobject.object.convert-to-path}" if="plus.svgobject.object.convert-to-path"></param>
+      
+<param name="plus-svgobject-raster-imagemap" expression="${plus.svgobject.raster.imagemap}" if="plus.svgobject.raster.imagemap"></param>
+      
+<param name="plus-svgobject-path" expression="${plus.svgobject.path}" if="plus.svgobject.path"></param>
+
+
+
+      <!-- Syntax Diagram parameters. -->
+      
+<param name="plus-syntaxdiagram-format" expression="${plus.syntaxdiagram.format}" if="plus.syntaxdiagram.format"></param>
+
+
+
+
+      <!-- Tree Diagram parameters. -->
+      
+<param name="plus-treediagram-format" expression="${plus.treediagram.format}" if="plus.treediagram.format"></param>
+
+
+
+
+      <!-- Tree Diagram parameters. -->
+      
+<param name="plus-allhtml-treediagram-svgobject-csspath" expression="${plus-allhtml-treediagram-svgobject.csspath}" if="plus-allhtml-treediagram-svgobject.csspath"></param>
+      
+<param name="plus-allhtml-treediagram-svgobject-jspath" expression="${plus-allhtml-treediagram-svgobject.jspath}" if="plus-allhtml-treediagram-svgobject.jspath"></param>
+
+
+
+
+      <!-- Tree Diagram parameters. -->
+      
+<param name="plus-allhtml-treediagram-svginline-csspath" expression="${plus-allhtml-treediagram-svginline.csspath}" if="plus-allhtml-treediagram-svginline.csspath"></param>
+      
+<param name="plus-allhtml-treediagram-svginline-jspath" expression="${plus-allhtml-treediagram-svginline.jspath}" if="plus-allhtml-treediagram-svginline.jspath"></param>
+
+
+
+
+      <!-- Syntax Diagram parameters. -->
+      
+<param name="plus-allhtml-syntaxdiagram-svgobject-csspath" expression="${plus-allhtml-syntaxdiagram-svgobject.csspath}" if="plus-allhtml-syntaxdiagram-svgobject.csspath"></param>
+      
+<param name="plus-allhtml-syntaxdiagram-svgobject-jspath" expression="${plus-allhtml-syntaxdiagram-svgobject.jspath}" if="plus-allhtml-syntaxdiagram-svgobject.jspath"></param>
+
+
+
+
+      <!-- Syntax Diagram parameters. -->
+      
+<param name="plus-allhtml-syntaxdiagram-svginline-csspath" expression="${plus-allhtml-syntaxdiagram-svginline.csspath}" if="plus-allhtml-syntaxdiagram-svginline.csspath"></param>
+      
+<param name="plus-allhtml-syntaxdiagram-svginline-jspath" expression="${plus-allhtml-syntaxdiagram-svginline.jspath}" if="plus-allhtml-syntaxdiagram-svginline.jspath"></param>
+
+
+
+    </xslt>
+  </target>
+
+  <target name="plus-allhtml-topic2html.xhtml.regexpmapper" unless="noTopic">
+    <condition property="out.ext" value=".html">
+      <not>
+        <isset property="out.ext"></isset>
+      </not>
+    </condition>
+    <condition property="args.xsl" value="${dita.script.dir}${file.separator}dita2xhtml.xsl">
+      <not>
+        <isset property="args.xsl"></isset>
+      </not>
+    </condition>
+    <makeurl validate="no" file="${dita.input.valfile}" property="dita.input.valfile.url"></makeurl>
+    <xslt processor="trax" basedir="${dita.temp.dir}" destdir="${destdir}" includes="${includes}" style="${args.xsl}" classpathref="dost.class.path" filenameparameter="CURRENTFILE" filedirparameter="CURRENTDIR">
+      <mapper type="regexp" from="${mapperfrom}" to="${mapperto}"></mapper>
+      <param name="DITAEXT" expression="${dita.ext}" if="dita.ext"></param>
+      <param name="FILTERFILE" expression="${dita.input.valfile.url}" if="dita.input.valfile"></param>
+      <param name="CSS" expression="${args.css.file}" if="args.css.file"></param>
+      <param name="CSSPATH" expression="${user.csspath}" if="user.csspath"></param>
+      <param name="HDF" expression="${args.hdf}" if="args.hdf"></param>
+      <param name="HDR" expression="${args.hdr}" if="args.hdr"></param>
+      <param name="FTR" expression="${args.ftr}" if="args.ftr"></param>
+      <param name="DRAFT" expression="${args.draft}" if="args.draft"></param>
+      <param name="ARTLBL" expression="${args.artlbl}" if="args.artlbl"></param>
+      <param name="INDEXSHOW" expression="${args.indexshow}" if="args.indexshow"></param>
+      <param name="OUTEXT" expression="${out.ext}" if="out.ext"></param>
+      
+  
+<param name="ENCODING" expression="${plus.topics.encoding}" if="plus.topics.encoding"></param>
+
+      
+
+      <!-- SVG image parameters. -->
+      
+<param name="plus-svgimage-format" expression="${plus.svgimage.format}" if="plus.svgimage.format"></param>
+
+
+
+      <!-- MathML parameters. -->
+      
+<param name="plus-mathml-format" expression="${plus.mathml.format}" if="plus.mathml.format"></param>
+
+
+
+
+      <!-- SVG-object parameters. -->
+      
+<param name="plus-svgobject-format" expression="${plus.svgobject.format}" if="plus.svgobject.format"></param>
+      
+<param name="plus-svgobject-raster-mimetype" expression="${plus.svgobject.raster.mimetype}" if="plus.svgobject.raster.mimetype"></param>
+      
+<param name="plus-svgobject-object-convert-to-path" expression="${plus.svgobject.object.convert-to-path}" if="plus.svgobject.object.convert-to-path"></param>
+      
+<param name="plus-svgobject-raster-imagemap" expression="${plus.svgobject.raster.imagemap}" if="plus.svgobject.raster.imagemap"></param>
+      
+<param name="plus-svgobject-path" expression="${plus.svgobject.path}" if="plus.svgobject.path"></param>
+
+
+
+      <!-- Syntax Diagram parameters. -->
+      
+<param name="plus-syntaxdiagram-format" expression="${plus.syntaxdiagram.format}" if="plus.syntaxdiagram.format"></param>
+
+
+
+
+      <!-- Tree Diagram parameters. -->
+      
+<param name="plus-treediagram-format" expression="${plus.treediagram.format}" if="plus.treediagram.format"></param>
+
+
+
+
+      <!-- Tree Diagram parameters. -->
+      
+<param name="plus-allhtml-treediagram-svgobject-csspath" expression="${plus-allhtml-treediagram-svgobject.csspath}" if="plus-allhtml-treediagram-svgobject.csspath"></param>
+      
+<param name="plus-allhtml-treediagram-svgobject-jspath" expression="${plus-allhtml-treediagram-svgobject.jspath}" if="plus-allhtml-treediagram-svgobject.jspath"></param>
+
+
+
+
+      <!-- Tree Diagram parameters. -->
+      
+<param name="plus-allhtml-treediagram-svginline-csspath" expression="${plus-allhtml-treediagram-svginline.csspath}" if="plus-allhtml-treediagram-svginline.csspath"></param>
+      
+<param name="plus-allhtml-treediagram-svginline-jspath" expression="${plus-allhtml-treediagram-svginline.jspath}" if="plus-allhtml-treediagram-svginline.jspath"></param>
+
+
+
+
+      <!-- Syntax Diagram parameters. -->
+      
+<param name="plus-allhtml-syntaxdiagram-svgobject-csspath" expression="${plus-allhtml-syntaxdiagram-svgobject.csspath}" if="plus-allhtml-syntaxdiagram-svgobject.csspath"></param>
+      
+<param name="plus-allhtml-syntaxdiagram-svgobject-jspath" expression="${plus-allhtml-syntaxdiagram-svgobject.jspath}" if="plus-allhtml-syntaxdiagram-svgobject.jspath"></param>
+
+
+
+
+      <!-- Syntax Diagram parameters. -->
+      
+<param name="plus-allhtml-syntaxdiagram-svginline-csspath" expression="${plus-allhtml-syntaxdiagram-svginline.csspath}" if="plus-allhtml-syntaxdiagram-svginline.csspath"></param>
+      
+<param name="plus-allhtml-syntaxdiagram-svginline-jspath" expression="${plus-allhtml-syntaxdiagram-svginline.jspath}" if="plus-allhtml-syntaxdiagram-svginline.jspath"></param>
+
+
+
+    </xslt>
+  </target>
+
+  <target name="plus-allhtml-topic2html.xhtml.globmapper" unless="noTopic">
+    <condition property="out.ext" value=".html">
+      <not>
+        <isset property="out.ext"></isset>
+      </not>
+    </condition>
+    <condition property="args.xsl" value="${dita.script.dir}${file.separator}dita2xhtml.xsl">
+      <not>
+        <isset property="args.xsl"></isset>
+      </not>
+    </condition>
+    <makeurl validate="no" file="${dita.input.valfile}" property="dita.input.valfile.url"></makeurl>
+    <xslt processor="trax" basedir="${dita.temp.dir}" destdir="${destdir}" includes="${includes}" style="${args.xsl}" classpathref="dost.class.path" filenameparameter="CURRENTFILE" filedirparameter="CURRENTDIR">
+      <mapper type="glob" from="${mapperfrom}" to="${mapperto}"></mapper>
+      <param name="DITAEXT" expression="${dita.ext}" if="dita.ext"></param>
+      <param name="FILTERFILE" expression="${dita.input.valfile.url}" if="dita.input.valfile"></param>
+      <param name="CSS" expression="${args.css.file}" if="args.css.file"></param>
+      <param name="CSSPATH" expression="${user.csspath}" if="user.csspath"></param>
+      <param name="HDF" expression="${args.hdf}" if="args.hdf"></param>
+      <param name="HDR" expression="${args.hdr}" if="args.hdr"></param>
+      <param name="FTR" expression="${args.ftr}" if="args.ftr"></param>
+      <param name="DRAFT" expression="${args.draft}" if="args.draft"></param>
+      <param name="ARTLBL" expression="${args.artlbl}" if="args.artlbl"></param>
+      <param name="INDEXSHOW" expression="${args.indexshow}" if="args.indexshow"></param>
+      <param name="OUTEXT" expression="${out.ext}" if="out.ext"></param>
+      
+  
+<param name="ENCODING" expression="${plus.topics.encoding}" if="plus.topics.encoding"></param>
+
+      
+
+      <!-- SVG image parameters. -->
+      
+<param name="plus-svgimage-format" expression="${plus.svgimage.format}" if="plus.svgimage.format"></param>
+
+
+
+      <!-- MathML parameters. -->
+      
+<param name="plus-mathml-format" expression="${plus.mathml.format}" if="plus.mathml.format"></param>
+
+
+
+
+      <!-- SVG-object parameters. -->
+      
+<param name="plus-svgobject-format" expression="${plus.svgobject.format}" if="plus.svgobject.format"></param>
+      
+<param name="plus-svgobject-raster-mimetype" expression="${plus.svgobject.raster.mimetype}" if="plus.svgobject.raster.mimetype"></param>
+      
+<param name="plus-svgobject-object-convert-to-path" expression="${plus.svgobject.object.convert-to-path}" if="plus.svgobject.object.convert-to-path"></param>
+      
+<param name="plus-svgobject-raster-imagemap" expression="${plus.svgobject.raster.imagemap}" if="plus.svgobject.raster.imagemap"></param>
+      
+<param name="plus-svgobject-path" expression="${plus.svgobject.path}" if="plus.svgobject.path"></param>
+
+
+
+      <!-- Syntax Diagram parameters. -->
+      
+<param name="plus-syntaxdiagram-format" expression="${plus.syntaxdiagram.format}" if="plus.syntaxdiagram.format"></param>
+
+
+
+
+      <!-- Tree Diagram parameters. -->
+      
+<param name="plus-treediagram-format" expression="${plus.treediagram.format}" if="plus.treediagram.format"></param>
+
+
+
+
+      <!-- Tree Diagram parameters. -->
+      
+<param name="plus-allhtml-treediagram-svgobject-csspath" expression="${plus-allhtml-treediagram-svgobject.csspath}" if="plus-allhtml-treediagram-svgobject.csspath"></param>
+      
+<param name="plus-allhtml-treediagram-svgobject-jspath" expression="${plus-allhtml-treediagram-svgobject.jspath}" if="plus-allhtml-treediagram-svgobject.jspath"></param>
+
+
+
+
+      <!-- Tree Diagram parameters. -->
+      
+<param name="plus-allhtml-treediagram-svginline-csspath" expression="${plus-allhtml-treediagram-svginline.csspath}" if="plus-allhtml-treediagram-svginline.csspath"></param>
+      
+<param name="plus-allhtml-treediagram-svginline-jspath" expression="${plus-allhtml-treediagram-svginline.jspath}" if="plus-allhtml-treediagram-svginline.jspath"></param>
+
+
+
+
+      <!-- Syntax Diagram parameters. -->
+      
+<param name="plus-allhtml-syntaxdiagram-svgobject-csspath" expression="${plus-allhtml-syntaxdiagram-svgobject.csspath}" if="plus-allhtml-syntaxdiagram-svgobject.csspath"></param>
+      
+<param name="plus-allhtml-syntaxdiagram-svgobject-jspath" expression="${plus-allhtml-syntaxdiagram-svgobject.jspath}" if="plus-allhtml-syntaxdiagram-svgobject.jspath"></param>
+
+
+
+
+      <!-- Syntax Diagram parameters. -->
+      
+<param name="plus-allhtml-syntaxdiagram-svginline-csspath" expression="${plus-allhtml-syntaxdiagram-svginline.csspath}" if="plus-allhtml-syntaxdiagram-svginline.csspath"></param>
+      
+<param name="plus-allhtml-syntaxdiagram-svginline-jspath" expression="${plus-allhtml-syntaxdiagram-svginline.jspath}" if="plus-allhtml-syntaxdiagram-svginline.jspath"></param>
+
+
+
+    </xslt>
+  </target>
+
+</project>

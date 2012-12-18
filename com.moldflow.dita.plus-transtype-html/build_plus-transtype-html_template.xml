@@ -8,9 +8,9 @@
 
     <dirname property="plus-transtype-html.dir" file="${ant.file.plus-transtype-html}"/>
     
-    <import file="../../build_init.xml" />
+    <!--import file="../../build_init.xml" />
     <import file="../../build_preprocess.xml" />
-    <!-- <import file="../../build_general.xml" /> -->
+    <import file="../../build_general.xml" /> -->
 	
     <target name="dita2html+"
       dita:depends="{depend.plus-transtype-html.pre},

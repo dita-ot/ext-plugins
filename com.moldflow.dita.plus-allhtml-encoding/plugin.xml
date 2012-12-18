@@ -2,6 +2,24 @@
 
   <require plugin="com.moldflow.dita.plus-transtype-anyhtml"/>
   <require plugin="com.moldflow.dita.plus-allhtml-xhtml-namespace" importance="optional"/>
+  
+  <extension-point id="plus.topics.xhtml.param" name="XHTML params"/>
+  <extension-point id="plus.topics.html.param" name="HTML params"/>
+  <extension-point id="xsl.plus-transtype-xhtml.topics.basic" name="XHTML basic topic"/>
+  <extension-point id="xsl.plus-transtype-html.topics.basic" name="HTML basic topic"/>
+  <extension-point id="xsl.plus-transtype-htmlhelp.topics.basic" name="HTMLhelp basic topic"/>
+  <extension-point id="xsl.plus-transtype-eclipsehelp.topics.basic" name="Eclipsehelp basic topic"/>
+  <extension-point id="plus-eclipsehelp-topics-twopass.stage2.param" name="Ecllipsehelp twopass stage2 params"/>
+  <extension-point id="plus-htmlhelp-topics-twopass.stage2.param" name="HTMLhelp twopass stage2 params"/>
+  <extension-point id="plus-html-topics-twopass.stage2.param" name="HTML twopass stage2 params"/>
+  <extension-point id="plus-xhtml-topics-twopass.stage2.param" name="XHTML twopass stage2 params"/>
+  <extension-point id="xsl.plus-eclipsehelp-topics-twopass.stage2" name="Eclipse twopass stage2"/>
+  <extension-point id="xsl.plus-htmlhelp-topics-twopass.stage2" name="HTMLhelp twopass stage2"/>
+  <extension-point id="xsl.plus-html-topics-twopass.stage2" name="HTML twopass stage2"/>
+  <extension-point id="xsl.plus-eclipsehelp-topics-twopass.stage2" name="Eclipse twopass stage2"/>
+  <extension-point id="xsl.plus-htmlhelp-topics-twopass.stage2" name="HTMLhelp twopass stage2"/>
+  <extension-point id="xsl.plus-html-topics-twopass.stage2" name="HTML twopass stage2"/>
+  <extension-point id="xsl.plus-xhtml-topics-twopass.stage2" name="XHTML twopass stage2"/>
 
   <template file="build_plus-allhtml-encoding_template.xml"/>
 
@@ -22,4 +40,6 @@
   <feature extension="xsl.plus-htmlhelp-topics-twopass.stage2" value="xsl/html-stage2.xsl" type="file"/>
   <feature extension="xsl.plus-html-topics-twopass.stage2" value="xsl/html-stage2.xsl" type="file"/>
   <feature extension="xsl.plus-xhtml-topics-twopass.stage2" value="xsl/xhtml-stage2.xsl" type="file"/>
+  
+  
 </plugin>

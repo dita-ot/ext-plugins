@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?><project name="plus-allhtml-treediagram-svgobject">
+
+  <target name="plus-allhtml-treediagram-svgobject.init" depends="plus-allhtml-treediagram.init,plus-allhtml-svgobject.init,treediagram2svg.copy-files.init">
+    <condition property="plus.treediagram.format" value="svgobject">
+      <not>
+        <isset property="plus.treediagram.format"></isset>
+      </not>
+    </condition>
+
+    <!-- Default location for CSS that applies to treediagrams,
+         relative to root of temp (svgobject, svgraster) dir. -->
+    <condition property="plus-allhtml-treediagram-svgobject.csspath" value="css/">
+      <and>
+        <equals arg1="${plus.treediagram.format}" arg2="svgobject"></equals>
+        <not><isset property="plus-allhtml-treediagram-svgobject.csspath"></isset></not>
+      </and>
+    </condition>
+
+    <!-- Default location for Javascript that processes treediagrams,
+         relative to root of temp dir. -->
+    <condition property="plus-allhtml-treediagram-svgobject.jspath" value="js/treediagram-svg/">
+      <and>
+        <equals arg1="${plus.treediagram.format}" arg2="svgobject"></equals>
+        <not><isset property="plus-allhtml-treediagram-svgobject.jspath"></isset></not>
+      </and>
+    </condition>
+
+    <fileset id="plus-allhtml-treediagram-svgobject.files.css" dir="${treediagram2svg.css.root}" includes="*.css"></fileset>
+    <fileset id="plus-allhtml-treediagram-svgobject.files.js" dir="${treediagram2svg.js.root}" includes="*.js"></fileset>
+    
+  </target>
+
+  <target name="plus-allhtml-treediagram-svgobject.copy-files" depends="plus-allhtml-treediagram-svgobject.init,      treediagram2svg.copy-files.init,      plus-allhtml-treediagram-svgobject.copy-files.js,      plus-allhtml-treediagram-svgobject.copy-files.css">
+  </target>
+
+  <target name="plus-allhtml-treediagram-svgobject.copy-files.js" if="plus-allhtml-treediagram-svgobject.jspath">
+    <antcall target="plus-allhtml-svgobject.copy-files.js">
+      <param name="jspath" value="${plus-allhtml-treediagram-svgobject.jspath}"></param>
+      <reference torefid="fileset" refid="plus-allhtml-treediagram-svgobject.files.js"></reference>
+    </antcall>
+    <antcall target="plus-allhtml-svgobject.gen-file.js">
+      <param name="style" value="${treediagram2svg.dir}/xsl/make-constants.xsl"></param>
+      <param name="jspath" value="${plus-allhtml-treediagram-svgobject.jspath}"></param>
+      <param name="in" value="${treediagram2svg.constants}"></param>
+      <param name="out" value="constants.js"></param>
+    </antcall>
+  </target>
+
+  <target name="plus-allhtml-treediagram-svgobject.copy-files.css" if="plus-allhtml-treediagram-svgobject.copy-files.css">
+    <antcall target="plus-allhtml-svgobject.copy-files.css">
+      <param name="csspath" value="${plus-allhtml-treediagram-svgobject.csspath}"></param>
+      <reference torefid="fileset" refid="plus-allhtml-treediagram-svgobject.files.css"></reference>
+    </antcall>
+  </target>
+
+</project>

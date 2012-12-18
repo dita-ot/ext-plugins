@@ -2,6 +2,11 @@
 
   <require plugin="com.moldflow.dita.plus-allhtml-xhtml-namespace"/>
   <require plugin="com.moldflow.dita.plus-allhtml-svgimage"/>
+  
+  <extension-point id="xsl.plus-xhtml-topics-twopass.stage1" name="XHTML stage1"/>
+  <extension-point id="xsl.plus-eclipsehelp-topics-twopass.stage1" name="Eclipsehelp stage1"/>  
+  <extension-point id="depend.plus-eclipsehelp-topics-twopass.stage1.pre" name="Eclipsehelp twopass stage1 pre-processing"/>
+  <extension-point id="depend.plus-html-topics-twopass.stage1.pre" name="HTML twopass stage1 pre-processing"/>
 
   <template file="build_plus-allhtml-svgimage-svginline_template.xml"/>
 

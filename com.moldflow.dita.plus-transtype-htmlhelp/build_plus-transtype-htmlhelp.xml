@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?><!-- This file is part of the DITA Open Toolkit project hosted on 
+     Sourceforge.net. See the accompanying license.txt file for 
+     applicable licenses.--><!-- (c) Copyright IBM Corp. 2006 All Rights Reserved. --><project name="plus-transtype-htmlhelp" default="dita2htmlhelp+">
+
+    <dirname property="plus-transtype-htmlhelp.dir" file="${ant.file.plus-transtype-htmlhelp}"></dirname>
+
+    <property name="transtype" value="htmlhelp+"></property>
+    
+    <!--import file="../../build_init.xml" />
+    <import file="../../build_preprocess.xml" /-->
+
+    <target name="dita2htmlhelp+" depends="build-init,preprocess,plus-transtype-htmlhelp.map.basic,copy-css,plus-htmlhelp-topics-twopass.dispatch,plus-transtype-htmlhelp.topics.basic,plus-htmlhelp-includefile.set-includefile,plus-transtype-htmlhelp.compile.perform">
+    </target>
+
+    <target name="plus-transtype-htmlhelp.map.basic" depends="plus-transtype-htmlhelp.map.basic.class.fallback,plus-transtype-htmlhelp.map.basic.init,plus-htmlhelp-currentencoding.defaultencoding,plus-htmlhelp-hhp-windows-configfile.make-url,plus-htmlhelp-alias.make-absolute,plus-htmlhelp-map.make-absolute,plus-htmlhelp-csh.alias,plus-htmlhelp-includefile.set-includefile,plus-transtype-htmlhelp.map.basic.hhp,plus-htmlhelp-currentencoding.hhp.convert,plus-transtype-htmlhelp.map.basic.hhc,plus-htmlhelp-currentencoding.hhc.convert,plus-transtype-htmlhelp.map.basic.hhk,plus-htmlhelp-currentencoding.hhk.convert"></target>
+
+    <target name="plus-transtype-htmlhelp.map.basic.class.fallback">
+      <condition property="plus.map.class.basic">
+        <or>
+          <not>
+            <isset property="plus.map.class"></isset>
+          </not>
+          <equals arg1="${plus.map.class}" arg2="basic"></equals>
+        </or>
+      </condition>
+    </target>
+
+    <target name="plus-transtype-htmlhelp.map.basic.init" description="Init properties for HTMLHelp" if="plus.map.class.basic">
+        <condition property="out.ext" value=".html">
+            <not>
+                <isset property="out.ext"></isset>
+            </not>
+        </condition>
+    </target>
+
+    <target name="plus-transtype-htmlhelp.map.basic.hhp" depends="plus-transtype-htmlhelp.map.basic.init" if="plus.map.class.basic" description="Build HTMLHelp HHP file">
+        <xslt processor="trax" basedir="${dita.temp.dir}" destdir="${output.dir}" includes="${user.input.file}" extension=".hhp" style="${plus-transtype-htmlhelp.dir}/xsl/map2hhp.xsl" classpathref="dost.class.path">
+            <param name="DITAEXT" expression="${dita.ext}" if="dita.ext"></param>
+            <param name="OUTEXT" expression="${out.ext}" if="out.ext"></param>
+            <param name="HHCNAME" expression="${dita.map.filename.root}.hhc"></param>
+            <param name="INCLUDEFILE" expression="${args.htmlhelp.includefile}" if="args.htmlhelp.includefile"></param>
+            
+  
+<param name="plus-htmlhelp-windows-configfile" expression="${plus.htmlhelp.windows.configfile.url}" if="plus.htmlhelp.windows.configfile"></param>
+
+  
+<param name="HELPALIAS" expression="${plus.htmlhelp.alias.absolute}" if="plus.htmlhelp.alias.absolute"></param>
+  
+<param name="HELPMAP" expression="${plus.htmlhelp.map.absolute}" if="plus.htmlhelp.map.absolute"></param>
+
+        </xslt>
+    </target>
+
+    <target name="plus-transtype-htmlhelp.map.basic.hhc" depends="plus-transtype-htmlhelp.map.basic.init" if="plus.map.class.basic" description="Build HTMLHelp HHC file">
+        <xslt processor="trax" basedir="${dita.temp.dir}" destdir="${output.dir}" includes="${user.input.file}" extension=".hhc" style="${plus-transtype-htmlhelp.dir}/xsl/map2hhc.xsl">
+            <param name="DITAEXT" expression="${dita.ext}" if="dita.ext"></param>
+            <param name="OUTEXT" expression="${out.ext}" if="out.ext"></param>
+            
+        </xslt>
+    </target>
+
+    <target name="plus-transtype-htmlhelp.map.basic.hhk" depends="plus-transtype-htmlhelp.map.basic.init" if="plus.map.class.basic" description="Build HTMLHelp HHK file">
+      <pipeline message="Extract index term." tempdir="${dita.temp.dir}" inputmap="${user.input.file}">
+        <module class="org.dita.dost.module.IndexTermExtractModule">
+          <param name="output" location="${output.dir}${file.separator}${user.input.file}"></param>
+          <param name="targetext" value="${out.ext}"></param>
+          <param name="indextype" value="htmlhelp"></param>
+          <param name="encoding" value="${args.dita.locale}" if="args.dita.locale"></param>
+        </module>
+      </pipeline>
+    </target>
+
+    <target name="plus-transtype-htmlhelp.topics.basic" if="plus.topics.class.basic" depends="plus-transtype-htmlhelp.topics.basic.class.fallback,plus-allhtml-mathml.init,plus-allhtml-syntaxdiagram.init,plus-htmlhelp-currentencoding.topics.defaultencoding,plus-allhtml-treediagram.init,plus-transtype-htmlhelp.topics.basic.perform"></target>
+
+    <target name="plus-transtype-htmlhelp.topics.basic.class.fallback">
+      <condition property="plus.topics.class.basic">
+        <or>
+          <not>
+            <isset property="plus.topics.class"></isset>
+          </not>
+          <equals arg1="${plus.topics.class}" arg2="basic"></equals>
+        </or>
+      </condition>
+    </target>
+
+    <target name="plus-transtype-htmlhelp.topics.basic.perform" if="plus.topics.class.basic">
+      <antcall target="plus-transtype-htmlhelp.topics.basic.all"></antcall>
+      <antcall target="plus-transtype-htmlhelp.topics.basic.inner"></antcall>
+      <!-- No outer; HTML Help compiler ignores them anyway. -->
+    </target>
+
+    <target name="plus-transtype-htmlhelp.topics.basic.all" if="old.transform">
+      <antcall target="plus-allhtml-topic2html.html.nomapper">
+        <param name="includes" value="${fullditatopiclist} ${chunkedtopiclist}"></param>
+        <param name="destdir" value="${output.dir}"></param>
+        <param name="args.xsl" value="${plus-transtype-htmlhelp.dir}/xsl/dita2html-shell.xsl"></param>
+      </antcall>
+    </target>
+
+    <target name="plus-transtype-htmlhelp.topics.basic.inner" if="inner.transform">
+      <antcall target="plus-allhtml-topic2html.html.regexpmapper">
+        <param name="includes" value="${fullditatopiclist} ${chunkedtopiclist}"></param>
+        <param name="destdir" value="${output.dir}"></param>
+        <param name="args.xsl" value="${plus-transtype-htmlhelp.dir}/xsl/dita2html-shell.xsl"></param>
+        <param name="mapperfrom" value="^(${tempdirToinputmapdir.relative.value})(.*?)(\.(xml|dita))$$"></param>
+        <param name="mapperto" value="\2${out.ext}"></param>
+      </antcall>
+    </target>
+
+    <target name="plus-transtype-htmlhelp.compile.perform" if="HTMLHelpCompiler" description="Compile HTMLHelp output">
+      <condition property="compile.dir" value="${output.dir}">
+        <isset property="inner.transform"></isset>
+      </condition>
+      <condition property="compile.dir" value="${dita.map.output.dir}">
+        <isset property="old.transform"></isset>
+      </condition>
+      <exec executable="${HTMLHelpCompiler}" failonerror="${failonerror}" failifexecutionfails="${failonerror}">
+        <arg value="${compile.dir}${file.separator}${dita.map.filename.root}.hhp"></arg>
+      </exec>
+    </target>
+
+</project>

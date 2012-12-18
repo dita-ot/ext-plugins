@@ -1,7 +1,24 @@
 <plugin id="com.moldflow.dita.plus-allhtml-svgobject">
 
   <require plugin="com.moldflow.dita.plus-anyhtml-topics-twopass"/>
-  <require plugin="com.moldflow.dita.plus-allhtml-xhtml-namespace" importance="optional"/>
+  <require plugin="com.moldflow.dita.plus-allhtml-xhtml-namespace" importance="optional"/>  
+  
+  <extension-point id="xsl.plus-xhtml-topics-twopass.stage1" name="XHTML towpass stage1"/>
+  <extension-point id="xsl.plus-html-topics-twopass.stage1" name="HTML towpass stage1"/>
+  <extension-point id="xsl.plus-htmlhelp-topics-twopass.stage1" name="HTMLhelp towpass stage1"/>
+  <extension-point id="xsl.plus-eclipsehelp-topics-twopass.stage1" name="Eclipsehelp towpass stage1"/>
+  <extension-point id="xsl.plus-xhtml-topics-twopass.stage2" name="XHTML topics twopass stage2" type="file"/>
+  <extension-point id="xsl.plus-html-topics-twopass.stage2" name="HTML topics twopass stage2" type="file"/>
+  <extension-point id="xsl.plus-htmlhelp-topics-twopass.stage2" name="HTMLhelp topics twopass stage2" type="file"/>
+  <extension-point id="xsl.plus-eclipsehelp-topics-twopass.stage2" name="Eclipsehelp topics twopass stage2" type="file"/>
+  <extension-point id="depend.plus-eclipsehelp-topics-twopass.stage1.pre" name="Eclipsehelp twopass stage1 pre-processing"/>
+  <extension-point id="depend.plus-eclipsehelp-topics-twopass.stage1.post" name="Eclipsehelp twopass stage1 post-processing"/>
+  <extension-point id="depend.plus-htmlhelp-topics-twopass.stage1.pre" name="HTMLhelp twopass stage1 pre-processing"/>
+  <extension-point id="depend.plus-htmlhelp-topics-twopass.stage1.post" name="HTMLhelp twopass stage1 post-processing"/>
+  <extension-point id="depend.plus-xhtml-topics-twopass.stage1.pre" name="XHTML twopass stage1 pre-processing"/>
+  <extension-point id="depend.plus-xhtml-topics-twopass.stage1.post" name="XHTML twopass stage1 post-processing"/>
+  <extension-point id="depend.plus-html-topics-twopass.stage1.pre" name="HTML twopass stage1 pre-processing"/>
+  <extension-point id="depend.plus-html-topics-twopass.stage1.post" name="HTML twopass stage1 post-processing"/>
 
   <template file="build_plus-allhtml-svgobject_template.xml"/>
   <template file="xsl/svg2imagemap-shell_template.xsl"/>

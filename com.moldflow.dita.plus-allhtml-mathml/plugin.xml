@@ -1,6 +1,16 @@
 <plugin id="com.moldflow.dita.plus-allhtml-mathml">
   <require plugin="com.moldflow.dita.specialization.mathml2"/>
   <require plugin="com.moldflow.dita.plus-transtype-anyhtml"/>
+  
+  <extension-point id="depend.plus-transtype-eclipsehelp.topics.basic.pre" name="Basic Eclipsehelp pre-processing"/>
+  <extension-point id="depend.plus-transtype-htmlhelp.topics.basic.pre" name="Basic HTMLhelp pre-processing"/>
+  <extension-point id="depend.plus-transtype-html.topics.basic.pre" name="Basic HTML pre-processing"/>
+  <extension-point id="depend.plus-transtype-xhtml.topics.basic.pre" name="Basic XHTML pre-processing"/>
+  
+  <extension-point id="depend.plus-eclipsehelp-topics-twopass.stage1.pre" name="Eclipsehelp twopass topics preprocessing"/>
+  <extension-point id="depend.plus-htmlhelp-topics-twopass.stage1.pre" name="HTMLHELP twopass topics preprocessing"/>
+  <extension-point id="depend.plus-html-topics-twopass.stage1.pre" name="HTML twopass topics preprocessing"/>
+  <extension-point id="depend.plus-xhtml-topics-twopass.stage1.pre" name="XHTML twopass topics preprocessing"/>
 
   <template file="build_plus-allhtml-mathml_template.xml"/>
 

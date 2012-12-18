@@ -2,6 +2,8 @@
 
   <require plugin="com.moldflow.dita.doctype.xhtml"/>
   <require plugin="com.moldflow.dita.plus-transtype-eclipsehelp"/>
+  
+  <extension-point id="depend.plus-transtype-eclipsehelp.topics.dispatch" name="topic dispatching depend"/>
 
   <template file="build_plus-eclipsehelp-topics-twopass_template.xml"/>
   <template file="xsl/stage1-html-shell_template.xsl"/>

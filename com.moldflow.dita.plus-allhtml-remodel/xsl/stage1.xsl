@@ -22,26 +22,10 @@
         </xsl:variable>
         <body>
             <!-- Already put xml:lang on <html>; do not copy to body with commonattributes -->
-            <xsl:call-template name="gen-style">
-                <xsl:with-param name="conflictexist" select="$conflictexist"/>
-                <xsl:with-param name="flagrules" select="$flagrules"/>
-            </xsl:call-template>
             <xsl:call-template name="setidaname"/>
             <xsl:value-of select="$newline"/>
-            <xsl:call-template name="start-flagit">
-                <xsl:with-param name="flagrules" select="$flagrules"/>
-            </xsl:call-template>
-            <xsl:call-template name="start-revflag">
-                <xsl:with-param name="flagrules" select="$flagrules"/>
-            </xsl:call-template>
             <xsl:apply-templates select="." mode="remodel:gen-pieces"/>
             <!-- Include XHTML footer, if specified -->
-            <xsl:call-template name="end-revflag">
-                <xsl:with-param name="flagrules" select="$flagrules"/>
-            </xsl:call-template>
-            <xsl:call-template name="end-flagit">
-                <xsl:with-param name="flagrules" select="$flagrules"/>
-            </xsl:call-template>
         </body>
         <xsl:value-of select="$newline"/>
     </xsl:template>

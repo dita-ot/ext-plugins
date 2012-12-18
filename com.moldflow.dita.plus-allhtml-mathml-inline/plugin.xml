@@ -6,6 +6,8 @@
   <template file="build_plus-allhtml-mathml-inline_template.xml"/>
 
   <feature extension="dita.conductor.target.relative" value="build.xml" type="file"/>
+  
+  <!-- Not sure this one will break. -->
 
   <feature extension="xsl.plus-eclipsehelp-topics-twopass.stage1" value="xsl/xhtml.xsl" type="file"/>
   <feature extension="xsl.plus-xhtml-topics-twopass.stage1" value="xsl/xhtml.xsl" type="file"/>

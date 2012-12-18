@@ -3,11 +3,25 @@
   <require plugin="com.moldflow.dita.plus-allhtml-mathml"/>
   <require plugin="com.moldflow.dita.plus-allhtml-svgobject"/>
   <require plugin="com.moldflow.dita.mathml2svg"/>
+  
+  <extension-point id="xsl.plus-eclipsehelp-topics-twopass.stage1" name="Eclipsehelp twopass topics stage1"/>
+  <extension-point id="xsl.plus-htmlhelp-topics-twopass.stage1" name="HTMLhelp twopass topics stage1"/>
+  <extension-point id="xsl.plus-html-topics-twopass.stage1" name="HTML twopass topics stage1"/>
+  <extension-point id="xsl.plus-xhtml-topics-twopass.stage1" name="XHTML twopass topics stage1"/>
+  <extension-point id="depend.plus-eclipsehelp-topics-twopass.stage1.pre" name="Eclipsehelp twopass topics stage1 pre-processing"/>
+  <extension-point id="depend.plus-eclipsehelp-topics-twopass.stage1.post" name="Eclipsehelp twopass topics stage1 post-processing"/>
+  <extension-point id="depend.plus-htmlhelp-topics-twopass.stage1.pre" name="HTMLhelp twopass topics stage1 pre-processing"/>
+  <extension-point id="depend.plus-htmlhelp-topics-twopass.stage1.post" name="HTMLhelp twopass topics stage1 post-processing"/>
+  <extension-point id="depend.plus-html-topics-twopass.stage1.pre" name="HTML twopass topics stage1 pre-processing"/>
+  <extension-point id="depend.plus-html-topics-twopass.stage1.post" name="HTML twopass topics stage1 post-processing"/>
+  <extension-point id="depend.plus-xhtml-topics-twopass.stage1.pre" name="XHTML twopass topics stage1 pre-processing"/>
+  <extension-point id="depend.plus-xhtml-topics-twopass.stage1.post" name="XHTML twopass topics stage1 post-processing"/>
+  <extension-point id="depend.plus-allhtml-svgobject.make-static.pre" name="Make-static for all HTML"/>
 
   <template file="build_plus-allhtml-mathml-svgobject_template.xml"/>
 
   <feature extension="dita.conductor.target.relative" value="build.xml" type="file"/>
-
+  
   <feature extension="xsl.plus-eclipsehelp-topics-twopass.stage1" value="xsl/xhtml.xsl" type="file"/>
   <feature extension="xsl.plus-htmlhelp-topics-twopass.stage1" value="xsl/xhtml.xsl" type="file"/>
   <feature extension="xsl.plus-html-topics-twopass.stage1" value="xsl/xhtml.xsl" type="file"/>

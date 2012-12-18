@@ -2,6 +2,8 @@
 <plugin id="com.moldflow.dita.syntaxdiagram2svg">
 
   <feature extension="dita.conductor.target.relative" value="build.xml" type="file"/>
+  
+  <extension-point id="syntaxdiagram2svg.pull.xsl" name="Pull syntaxdiagrams"/>
 
   <!-- Make this XSLT available to any plugin that wants it. -->
   <feature extension="syntaxdiagram2svg.pull.xsl" value="xsl/syntaxdiagram2svg.xsl" type="file"/>

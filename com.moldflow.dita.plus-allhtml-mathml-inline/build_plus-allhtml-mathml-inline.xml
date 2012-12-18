@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?><project name="plus-allhtml-mathml-inline">
+
+  <target name="plus-allhtml-mathml-inline.init" depends="plus-allhtml-mathml.init">
+    <condition property="plus.mathml.format" value="inline">
+      <not>
+        <isset property="plus.mathml.format"></isset>
+      </not>
+    </condition>
+  </target>
+
+</project>

@@ -1,5 +1,14 @@
 <plugin id="com.moldflow.dita.plus-allhtml-xhtml-namespace">
   <require plugin="com.moldflow.dita.plus-xhtml-topics-twopass|com.moldflow.dita.plus-eclipsehelp-topics-twopass"/>
+  
+  <extension-point id="depend.plus-xhtml-topics-twopass.stage2.pre" name="XHTML stage2 preprocessing"/>
+  <extension-point id="depend.plus-eclipsehelp-topics-twopass.stage2.pre" name="Eclipse stage2 preprocessing"/>
+  <extension-point id="xsl.plus-xhtml-topics-twopass.stage2" name="XHTML stage2"/>
+  <extension-point id="xsl.plus-eclipsehelp-topics-twopass.stage2" name="Eclipse stage2"/>
+  <extension-point id="plus-xhtml-topics-twopass.stage2.param" name="XHTML stage2 params"/>
+  <extension-point id="plus-eclipsehelp-topics-twopass.stage2.param" name="Eclipse stage2 params"/>
+  <extension-point id="depend.plus-xhtml-topics-twopass.stage2.pre" name="XHTML stage 2 pre-processing"/>
+  <extension-point id="depend.plus-eclipsehelp-topics-twopass.stage2.pre" value="Eclipsehelp stage 2 pre-processing"/>
 
   <template file="build_plus-allhtml-xhtml-namespace_template.xml"/>
 

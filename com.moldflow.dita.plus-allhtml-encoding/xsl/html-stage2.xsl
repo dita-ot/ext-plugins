@@ -11,9 +11,6 @@
                     <xsl:when test="$ENCODING = 'MS932'">
                         <meta http-equiv="Content-Type" content="text/html; charset=shift_jis"/>
                     </xsl:when>
-                    <xsl:when test="$ENCODING = 'x-windows-950'">
-                        <meta http-equiv="Content-Type" content="text/html; charset=Big5"/>
-                    </xsl:when>                    
                     <xsl:when test="$ENCODING = 'MS936'">
                         <meta http-equiv="Content-Type" content="text/html; charset=gb2312"/>
                     </xsl:when>

@@ -1,6 +1,13 @@
 <plugin id="com.moldflow.dita.plus-htmlhelp-currentencoding">
 
   <require plugin="com.moldflow.dita.plus-allhtml-encoding"/>
+  
+  <extension-point id="depend.plus-transtype-htmlhelp.map.basic.pre" name="HTMLHELP map basic pre-processing"/>
+  <extension-point id="depend.plus-transtype-htmlhelp.map.basic.hhp.post" name="HTMLhelp map basic hhp post-processing"/>
+  <extension-point id="depend.plus-transtype-htmlhelp.map.basic.hhc.post" name="HTMLhelp map basic hhc post-processing"/>
+  <extension-point id="depend.plus-transtype-htmlhelp.map.basic.hhk.post" name="HTMLhelp map basic hhk post-processing"/>
+  <extension-point id="depend.plus-transtype-htmlhelp.topics.basic.pre" name="HTMLhelp topics basic pre-processing"/>
+  <extension-point id="depend.plus-htmlhelp-topics-twopass.stage2.pre" name="HTMLhelp topics twopass stage2 pre-processing"/>
 
   <template file="build_plus-htmlhelp-currentencoding_template.xml"/>
 
