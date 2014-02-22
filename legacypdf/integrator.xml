@@ -75,7 +75,7 @@
                 property="dita.merged.dir" />
             <xslt in="${input}"
                 out="${dita.merged.dir}${file.separator}${dita.map.filename.root}_MERGED.xml"
-                style="${dita.script.dir}${file.separator}topicmerge.xsl">
+                style="${dita.plugin.org.dita.legacypdf.dir}${file.separator}xslfo${file.separator}topicmerge.xsl">
                 <!--<xmlcatalog refid="dita.catalog" />-->
             </xslt>
             <xslt
