@@ -1271,6 +1271,20 @@ The attribute's contents were placed in a comment before the table.</xsl:with-pa
     <colspec>
       <xsl:attribute name="colname">col<xsl:value-of select="$on-column"/></xsl:attribute>
       <xsl:if test="@align"><xsl:attribute name="align"><xsl:value-of select="@align"/></xsl:attribute></xsl:if>
+      <!-- We need to take the @width from the HTML col corresponding to this colspec -->
+      <xsl:variable name="width" select="col[position() = $on-column]/@width"/>
+      <xsl:if test="$width">
+        <xsl:choose>
+          <xsl:when test="contains($width, '%')">
+            <!-- The width has "%" in it, replace it with "*"-->
+            <xsl:variable name="propWidth" select="concat(substring($width, 0, string-length($width)), '*')"/>
+            <xsl:attribute name="colwidth"><xsl:value-of select="$propWidth"/></xsl:attribute>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:attribute name="colwidth"><xsl:value-of select="$width"/></xsl:attribute>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:if>
     </colspec>
     <xsl:call-template name="create-colspec">
       <xsl:with-param name="total-cols"><xsl:value-of select="$total-cols"/></xsl:with-param>
