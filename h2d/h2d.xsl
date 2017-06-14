@@ -59,12 +59,22 @@
                 xmlns:saxon="http://icl.com/saxon"
                 extension-element-prefixes="saxon">
 <xsl:param name="infotype">topic</xsl:param>
+  <!-- Output XSLT messages warning various conversion problems + add XML comments in places where the conversion
+  is not perfect-->
+  <xsl:param name="verbose" select="false()"/>
+  <!-- Generate required cleanup elements -->
+  <xsl:param name="generateRequiredCleanup" select="false()"/>
+  <!-- Generate related links at the end of the topic -->
+  <xsl:param name="generateRelatedLinks" select="false()"/>
+  <!-- Convert XHTML metadata to DITA metadata -->
+  <xsl:param name="preserveMetadata" select="false()"/>
+
 <xsl:variable name="systemid">
     <xsl:choose>
-        <xsl:when test="$infotype='concept'">../dtd/concept.dtd</xsl:when>
-        <xsl:when test="$infotype='task'">../dtd/task.dtd</xsl:when>
-        <xsl:when test="$infotype='reference'">../dtd/reference.dtd</xsl:when>
-        <xsl:otherwise>../dtd/topic.dtd</xsl:otherwise>
+        <xsl:when test="$infotype='concept'">concept.dtd</xsl:when>  
+        <xsl:when test="$infotype='task'">task.dtd</xsl:when>  
+        <xsl:when test="$infotype='reference'">reference.dtd</xsl:when>
+        <xsl:otherwise>topic.dtd</xsl:otherwise>
     </xsl:choose>
 </xsl:variable>
 <xsl:variable name="publicid">
@@ -75,9 +85,8 @@
         <xsl:otherwise>-//OASIS//DTD DITA Topic//EN</xsl:otherwise>
     </xsl:choose>
 </xsl:variable>
-<xsl:output method="xml" indent="no" encoding="utf-8" 
-    doctype-system="{$systemid}" doctype-public="{$publicid}"/>
-
+  
+<xsl:output method="xml" indent="yes" encoding="UTF-8" />
 
 <!-- ========== PARAMETERS ============== -->
 
@@ -148,11 +157,20 @@
 
 <xsl:template name="output-message">
     <xsl:param name="msg" select="***"/>
+  <xsl:if test="$verbose">
     <xsl:message><xsl:value-of select="$msg"/></xsl:message>
+  </xsl:if>
 </xsl:template>
 
 <!-- if needed, add the dita wrapper here -->
 <xsl:template match="/">
+ 
+  <!-- oXygen patch --> 
+  <xsl:text disable-output-escaping="yes" xml:space="preserve">
+&lt;!DOCTYPE </xsl:text> <xsl:value-of select="$infotype"/>
+  PUBLIC "<xsl:value-of select="$publicid"/>" "<xsl:value-of select="$systemid"/>" <xsl:text disable-output-escaping="yes">&gt;</xsl:text>
+ <!-- end oXygen patch -->
+  
   <xsl:call-template name="validate-parameters"/>
 <!-- Some HTML editors store ordered lists as sequential lists, with all but the first
      using @start to resume numbering. If a topic uses this, the lists will be pulled together.
@@ -565,6 +583,7 @@
 
 <!-- 02/12/03 drd: mp says to leave this as linklist, not linkpool, for now -->
 <xsl:template name="genrellinks">
+  <xsl:if test="$generateRelatedLinks">
 <xsl:if test=".//a[@href][not(starts-with(@href,'#'))]">
 <related-links>
 <linklist><title>Collected links</title>
@@ -580,6 +599,7 @@
 </linklist>
 </related-links>
 </xsl:if>
+  </xsl:if>
 </xsl:template>
 
 <xsl:template name="genlinkattrs">
@@ -635,15 +655,17 @@
 <!-- gentitle was here -->
 
 <xsl:template name="genprolog">
-<xsl:if test=".//meta[@name][not(@name='generator' or @name='GENERATOR')]|head/comment()"><!-- produce only if qualifiend meta is extant -->
-  <prolog>
-    <!--xsl:comment>author, copyright, critdates, permissions, publisher, source</xsl:comment-->
-    <metadata>
-      <xsl:apply-templates select="head/comment()"/>
-      <xsl:apply-templates select=".//meta[not(@name='generator' or @name='GENERATOR')]" mode="outofline"/>
-    </metadata>
-  </prolog>
-</xsl:if>
+  <xsl:if test="$preserveMetadata">
+    <xsl:if test=".//meta[@name][not(@name='generator' or @name='GENERATOR')]|head/comment()"><!-- produce only if qualifiend meta is extant -->
+      <prolog>
+        <!--xsl:comment>author, copyright, critdates, permissions, publisher, source</xsl:comment-->
+        <metadata>
+          <xsl:apply-templates select="head/comment()"/>
+          <xsl:apply-templates select=".//meta[not(@name='generator' or @name='GENERATOR')]" mode="outofline"/>
+        </metadata>
+      </prolog>
+    </xsl:if>
+  </xsl:if>
 </xsl:template>
 
 
@@ -683,12 +705,24 @@
       <xsl:with-param name="msg">A <xsl:value-of select="name()"/> heading could not be converted into DITA.
 The heading has been placed in a required-cleanup element.</xsl:with-param>
   </xsl:call-template>
-  <required-cleanup>
+  <xsl:variable name="content">
     <p>
-      <b>[deprecated heading <xsl:value-of select="name()"/> ]: </b>
+      <xsl:if test="$generateRequiredCleanup">
+        <b>[deprecated heading <xsl:value-of select="name()"/> ]: </b>
+      </xsl:if>
       <xsl:apply-templates select="*|comment()|text()"/>
     </p>
-  </required-cleanup>
+  </xsl:variable>
+  <xsl:choose>
+    <xsl:when test="$generateRequiredCleanup">      
+      <required-cleanup>
+        <xsl:copy-of select="$content"/>
+      </required-cleanup>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:copy-of select="$content"/>
+    </xsl:otherwise>
+  </xsl:choose>
 </xsl:template>
 
 <xsl:template match="h1" priority="5">
@@ -794,10 +828,20 @@ The heading has been placed in a required-cleanup element.</xsl:with-param>
 The heading has been placed in a required-cleanup element.</xsl:with-param>
       </xsl:call-template>
       <section>
-        <required-cleanup>
+        <xsl:variable name="content">
           <title><xsl:apply-templates select="@class"/><xsl:apply-templates select="*|text()|comment()"/></title>
           <xsl:apply-templates select="(following-sibling::*|following-sibling::text()|following-sibling::comment())[1]" mode="add-content-to-section"/>
-        </required-cleanup>
+        </xsl:variable>
+        <xsl:choose>
+          <xsl:when test="$generateRequiredCleanup">      
+            <required-cleanup>
+              <xsl:copy-of select="$content"/>
+            </required-cleanup>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:copy-of select="$content"/>
+          </xsl:otherwise>
+        </xsl:choose>
       </section>
     </xsl:otherwise>
   </xsl:choose>
@@ -1271,20 +1315,6 @@ The attribute's contents were placed in a comment before the table.</xsl:with-pa
     <colspec>
       <xsl:attribute name="colname">col<xsl:value-of select="$on-column"/></xsl:attribute>
       <xsl:if test="@align"><xsl:attribute name="align"><xsl:value-of select="@align"/></xsl:attribute></xsl:if>
-      <!-- We need to take the @width from the HTML col corresponding to this colspec -->
-      <xsl:variable name="width" select="col[position() = $on-column]/@width"/>
-      <xsl:if test="$width">
-        <xsl:choose>
-          <xsl:when test="contains($width, '%')">
-            <!-- The width has "%" in it, replace it with "*"-->
-            <xsl:variable name="propWidth" select="concat(substring($width, 0, string-length($width)), '*')"/>
-            <xsl:attribute name="colwidth"><xsl:value-of select="$propWidth"/></xsl:attribute>
-          </xsl:when>
-          <xsl:otherwise>
-            <xsl:attribute name="colwidth"><xsl:value-of select="$width"/></xsl:attribute>
-          </xsl:otherwise>
-        </xsl:choose>
-      </xsl:if>
     </colspec>
     <xsl:call-template name="create-colspec">
       <xsl:with-param name="total-cols"><xsl:value-of select="$total-cols"/></xsl:with-param>
@@ -1641,7 +1671,9 @@ The attribute's contents were placed in a comment before the table.</xsl:with-pa
 The element's contents have been placed in a phrase element.
 There is a comment next to the phrase with the span's class value.</xsl:with-param>
           </xsl:call-template>
-          <xsl:comment>Original: &lt;span @class=<xsl:value-of select="@class"/>&gt;, <xsl:value-of select="@class"/>=<xsl:value-of select="$orig-span-style"/></xsl:comment>
+          <xsl:if test="$verbose">
+            <xsl:comment>Original: &lt;span @class=<xsl:value-of select="@class"/>&gt;, <xsl:value-of select="@class"/>=<xsl:value-of select="$orig-span-style"/></xsl:comment>
+          </xsl:if>
           <ph><xsl:apply-templates select="*|text()|comment()"/></ph>
         </xsl:otherwise>
       </xsl:choose>
@@ -1652,7 +1684,9 @@ There is a comment next to the phrase with the span's class value.</xsl:with-par
 The element's contents have been placed in a phrase element.
 There is a comment next to the phrase with the span's class value.</xsl:with-param>
       </xsl:call-template>
-      <xsl:comment>Original: &lt;span @class=<xsl:value-of select="@class"/>&gt;</xsl:comment>
+      <xsl:if test="$verbose">
+        <xsl:comment>Original: &lt;span @class=<xsl:value-of select="@class"/>&gt;</xsl:comment>
+      </xsl:if>
       <ph><xsl:apply-templates select="@class"/><xsl:apply-templates select="*|text()|comment()"/></ph>
     </xsl:otherwise>
   </xsl:choose>
@@ -1743,12 +1777,22 @@ There is a comment next to the phrase with the span's class value.</xsl:with-par
       <xsl:with-param name="msg">CLEANUP ACTION: provide a better phrase markup for a BIG or SMALL tag.
 The element's contents have been placed in a required-cleanup element.</xsl:with-param>
   </xsl:call-template>
-  <required-cleanup>
+  <xsl:variable name="content">
     <xsl:attribute name="remap"><xsl:value-of select="name()"/></xsl:attribute>
     <ph>
       <xsl:apply-templates select="@class|*|text()|comment()"/>
     </ph>
-  </required-cleanup>
+  </xsl:variable>
+  <xsl:choose>
+    <xsl:when test="$generateRequiredCleanup">      
+      <required-cleanup>
+        <xsl:copy-of select="$content"/>
+      </required-cleanup>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:copy-of select="$content"/>
+    </xsl:otherwise>
+  </xsl:choose>
 </xsl:template>
 
 
@@ -1757,12 +1801,22 @@ The element's contents have been placed in a required-cleanup element.</xsl:with
       <xsl:with-param name="msg">CLEANUP ACTION: provide a better phrase markup for a strikethrough tag.
 The element's contents have been placed in a required-cleanup element.</xsl:with-param>
   </xsl:call-template>
-  <required-cleanup>
+  <xsl:variable name="content">
     <xsl:attribute name="remap"><xsl:value-of select="name()"/></xsl:attribute>
     <ph>
       <xsl:apply-templates select="@class|*|text()|comment()"/>
     </ph>
-  </required-cleanup>
+  </xsl:variable>
+  <xsl:choose>
+    <xsl:when test="$generateRequiredCleanup">      
+      <required-cleanup>
+        <xsl:copy-of select="$content"/>
+      </required-cleanup>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:copy-of select="$content"/>
+    </xsl:otherwise>
+  </xsl:choose>
 </xsl:template>
 
 <!-- set of rules for faux-pre sections (paragraphs with br, using samp for font effect)-->
@@ -1791,12 +1845,22 @@ The element's contents have been placed in a required-cleanup element.</xsl:with
     <xsl:with-param name="msg">CLEANUP ACTION: no DITA equivalent for HTML element '<xsl:value-of select="name()"/>'.
 The element has been placed in a required-cleanup element.</xsl:with-param>
   </xsl:call-template>
-  <required-cleanup>
+  <xsl:variable name="content">
     <xsl:attribute name="remap"><xsl:value-of select="name()"/></xsl:attribute>
     <ph>
       <xsl:apply-templates select="*|text()|comment()"/>
     </ph>
-  </required-cleanup>
+  </xsl:variable>
+  <xsl:choose>
+    <xsl:when test="$generateRequiredCleanup">      
+      <required-cleanup>
+        <xsl:copy-of select="$content"/>
+      </required-cleanup>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:copy-of select="$content"/>
+    </xsl:otherwise>
+  </xsl:choose>
 </xsl:template>
 
 <!-- ====================================================================================== -->
